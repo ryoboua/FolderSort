@@ -55,18 +55,18 @@ async function runFolderSort() {
         const files = await readFiles()
 
         if (files && files.length) {
-            const filesExtensionsInFolder = files.reduce(reducer, [])
+            const fileExtensionsInFolder = files.reduce(reducer, [])
 
-            if(filesExtensionsInFolder.length) {
+            if(fileExtensionsInFolder.length) {
                 
-                for( let ext of filesExtensionsInFolder) {
+                for( let ext of fileExtensionsInFolder) {
                     ext = ext.split('.')[1]
                     await createFolder(ext)
                 }
     
                 for (let file of files) {
                     let ext = path.extname(file)
-                    if(filesExtensionsInFolder.includes(ext)) {
+                    if(fileExtensionsInFolder.includes(ext)) {
                         await moveFile(file, `${__dirname}/${ext.split('.')[1]}/`)
                     }
                 }
